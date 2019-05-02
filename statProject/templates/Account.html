@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="content-section" align="center">
+    <div class="media" >
+        <img  src="{{ image_file }}" class="img-thumbnail" alt="Cinque Terre">
+        <h1>
+           <span class="badge badge-pill badge-light">
+               <strong>          {{ user['Username']}}</strong>
+          </span>
+        </h1>
+
+    </div>
+    <dt>
+            <span class="badge badge-pill badge-light">
+                   bio
+            </span>
+        {% if user['bio'] == None %}
+              Your Biograghy
+        {% endif %}
+    </dt>
+
+   </div>
+<form  action ="{{ url_for('home', movieID = '')}}" method="POST" >
+   <br> <center><dt>Movies You Loved </dt></center>
+{%for movie in movies %}
+    {% if movie['Rated'] != 'R' and  movie['Rated'] != 'NC-17'%}
+   <div class="col-md-12"   align="center">
+          <div class="panel-success" >
+           <div class="content-section">
+               <center> <h1><span class="badge badge-secondary">{{movie['Title']}}</span></h1></center>
+                   <img src={{movie['Poster']}} alt="Cinque Terre" width="300" height="400"/>
+                     <div class="form-group">
+                         <a href="{{ url_for('movie', imdbID = movie['imdbID'])}}" class="btn btn-default" ><dt>View</dt></a>
+                            <a href="{{ url_for('recommendMovies', movieTitle = movie['Title'])}}" class="btn btn-default" ><dt>Movies Like</dt></a>
+                     </div>
+           </div>
+          </div>
+   </div>
+    {% endif %}
+{%endfor%}
+</form>
+{% endblock content %}

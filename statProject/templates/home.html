@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<form  action ="{{ url_for('home', movieID = '')}}" method="POST" >
+{%for movie in movies %}
+    {% if movie['Rated'] != 'R' and  movie['Rated'] != 'NC-17'%}
+   <div class="col-md-5"   align="center">
+          <div class="panel-success" >
+           <div class="content-section">
+               <center> <h1><span class="badge badge-secondary">{{movie['Title']}}</span></h1></center>
+                   <img src={{movie['Poster']}} alt="Cinque Terre" width="300" height="400"/>
+                     <div class="form-group">
+                    {%if logged=='true'%}
+                          <a href="{{ url_for('home', movieImdbId = movie['imdbID'])}}" class="btn btn-default" >
+                             <span class="glyphicon glyphicon-heart-empty"></span> Heart
+                         </a>
+                    {% endif %}
+                         <a href="{{ url_for('movie', imdbID = movie['imdbID'])}}" class="btn btn-default" ><dt>View</dt></a>
+                     </div>
+           </div>
+          </div>
+   </div>
+    {% endif %}
+{%endfor%}
+</form>
+{% endblock %}

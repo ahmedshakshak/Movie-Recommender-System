@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<form action ="{{ url_for('movie', imdbID =  movie['imdbID'] )}}" method="POST" >
+
+   <div class="col-md-11" align="center">
+          <div class="panel-success">
+                   <div class="content-section">
+                       <h1>{{movie['Title']}}</h1>
+                       <span class="badge badge-secondary">{{movie['Rated']}}</span>
+                       <span class="badge badge-secondary">{{movie['Runtime']}}</span>
+                       <span class="badge badge-secondary">{{movie['Genre']}}</span>
+                       <span class="badge badge-secondary">{{movie['Released']}}</span>
+                       <span class="badge badge-secondary">{{movie['Language']}}</span>
+                       <h1></h1>
+                       <img src={{movie['Poster']}} class="img-thumbnail" alt="Cinque Terre"/></div>
+                       {%if logged=='true'%}
+              <div class="content-section">
+                        <input type="text" name="RateID"  />
+                        <button href="{{ url_for('movie', imdbID = movie['imdbID'])}}" class="btn btn-default">Rate</button>
+              </div>
+                        {%endif%}
+                       <dt> {{ movie['Plot'] }}</dt>
+                         <h1><span class="badge badge-secondary">Stars: {{movie['Actors']}}</span></h1>
+                   </div>
+           </div>
+
+   </div>
+</form>
+
+{%endblock%}
